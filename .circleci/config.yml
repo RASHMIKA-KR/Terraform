@@ -42,7 +42,7 @@ workflows:
           filters:
             branches:
               only:
-                - your-branch
+                - main
 
       - hold-for-destroy:
           type: approval
@@ -55,4 +55,4 @@ workflows:
           filters:
             branches:
               only:
-                - your-branch
+                - main
