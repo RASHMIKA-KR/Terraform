@@ -1,11 +1,10 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-destroy:
     docker:
       - image: hashicorp/terraform:latest
     working_directory: /terraform_project
-
     steps:
       - checkout
       - run:
@@ -15,11 +14,20 @@ jobs:
           name: Terraform Apply
           command: terraform apply -auto-approve
 
+  hold-for-destroy:
+    docker:
+      - image: hashicorp/terraform:latest
+    working_directory: /terraform_project
+    steps:
+      - checkout
+      - run:
+          name: Hold for Destroy Approval
+          command: echo "Hold for manual approval for destroy..."
+
   destroy:
     docker:
       - image: hashicorp/terraform:latest
     working_directory: /terraform_project
-
     steps:
       - checkout
       - run:
@@ -34,18 +42,23 @@ jobs:
 
 workflows:
   version: 2
-  build_and_destroy:
+  build-and-destroy:
     jobs:
-      - build:
+      - build-and-destroy:
           filters:
             branches:
               only:
                 - main
 
+      - hold-for-destroy:
+          type: approval
+          requires:
+            - build-and-destroy
+
       - destroy:
           requires:
-            - build
+            - hold-for-destroy
           filters:
             branches:
               only:
-                - destroy-branch
+                - main
