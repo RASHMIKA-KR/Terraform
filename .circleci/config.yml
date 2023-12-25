@@ -4,7 +4,7 @@ jobs:
   build-and-destroy:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /Terraform
+    working_directory: /
     steps:
       - checkout
       - run:
@@ -17,7 +17,7 @@ jobs:
           name: Terraform Apply
           command: terraform apply -auto-approve tfplan
       - persist_to_workspace:
-          root: /Terraform
+          root: /
           paths:
             - tfplan
             - terraform.tfstate
@@ -26,11 +26,11 @@ jobs:
   hold-for-destroy:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /Terraform
+    working_directory: /
     steps:
       - checkout
       - attach_workspace:
-          at: /Terraform
+          at: /
       - run:
           name: Hold for Destroy Approval
           command: echo "Hold for manual approval for destroy..."
@@ -38,11 +38,11 @@ jobs:
   destroy:
     docker:
       - image: hashicorp/terraform:latest
-    working_directory: /Terraform
+    working_directory: /
     steps:
       - checkout
       - attach_workspace:
-          at: /Terraform
+          at: /
       - run:
           name: Terraform Destroy
           command: terraform destroy -auto-approve -state=terraform.tfstate
