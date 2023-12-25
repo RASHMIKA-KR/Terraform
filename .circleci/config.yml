@@ -8,6 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Print CI/CD Runner User
+          command: echo "CIRCLECI_USER: $CIRCLECI_USER, USER: $USER, HOME: $HOME"
+      - run:
           name: Terraform Init
           command: terraform init
       - run:
@@ -31,8 +34,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Print CI/CD Runner User
+          command: echo "CIRCLECI_USER: $CIRCLECI_USER, USER: $USER, HOME: $HOME"
+      - run:
+          name: Terraform Init
+          command: terraform init
+      - run:
           name: Terraform Destroy
-          command: terraform destroy
+          command: terraform destroy -auto-approve
 
 workflows:
   version: 2
