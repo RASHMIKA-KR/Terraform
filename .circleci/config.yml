@@ -9,7 +9,8 @@ jobs:
       - checkout
       - run:
           name: Print CI/CD Runner User
-          command: echo "CIRCLECI_USER: $CIRCLECI_USER, USER: $USER, HOME: $HOME"
+          command: echo "CIRCLECI_USER $CIRCLECI_USER, USER $USER, HOME $HOME"
+
       - run:
           name: Terraform Init
           command: terraform init
@@ -35,7 +36,7 @@ jobs:
       - checkout
       - run:
           name: Print CI/CD Runner User
-          command: echo "CIRCLECI_USER: $CIRCLECI_USER, USER: $USER, HOME: $HOME"
+          command: echo "CIRCLECI_USER $CIRCLECI_USER, USER $USER, HOME $HOME"
       - run:
           name: Terraform Init
           command: terraform init
