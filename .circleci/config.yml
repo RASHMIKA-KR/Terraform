@@ -31,12 +31,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Terraform Init
-          command: terraform init
-      - run:
           name: Terraform Destroy
-          command: terraform destroy -auto-approve
-
+          command: terraform destroy
 
 workflows:
   version: 2
