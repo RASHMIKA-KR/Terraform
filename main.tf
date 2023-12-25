@@ -3,6 +3,13 @@
 provider "aws" {
   region = "ap-south-1"  # Change to your desired AWS region
 }
+terraform {
+  backend "s3" {
+    bucket = "statetfaws"
+    key    = "terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
 
 module "vpc" {
   source = "./modules/vpc"
