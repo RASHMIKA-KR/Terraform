@@ -1,4 +1,46 @@
-version: 2.1
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 7:
+│    7: module "vpc" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all modules required by this configuration.
+╵
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 11:
+│   11: module "subnets" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all modules required by this configuration.
+╵
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 16:
+│   16: module "route_tables" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all modules required by this configuration.
+╵
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 21:
+│   21: module "security_groups" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all modules required by this configuration.
+╵
+╷
+│ Error: Module not installed
+│ 
+│   on main.tf line 26:
+│   26: module "ec2_instances" {
+│ 
+│ This module is not yet installed. Run "terraform init" to install all modules required by this configuration.
+╵
+
+Exited with code exit status 1
+error in cicrcleci  and the circleci code is   version: 2.1
 
 jobs:
   build-and-destroy:
