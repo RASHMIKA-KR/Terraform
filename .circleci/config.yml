@@ -4,6 +4,7 @@ jobs:
   build-and-destroy:
     docker:
       - image: hashicorp/terraform:latest
+    working_directory: /
     steps:
       - checkout
       - run:
@@ -25,6 +26,7 @@ jobs:
   hold-for-destroy:
     docker:
       - image: hashicorp/terraform:latest
+    working_directory: /
     steps:
       - checkout
       - attach_workspace:
@@ -36,6 +38,7 @@ jobs:
   destroy:
     docker:
       - image: hashicorp/terraform:latest
+    working_directory: /
     steps:
       - checkout
       - attach_workspace:
