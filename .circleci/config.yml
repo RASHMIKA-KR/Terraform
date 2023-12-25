@@ -11,24 +11,18 @@ jobs:
           name: Terraform Init
           command: terraform init
       - run:
-          name: Terraform Plan
-          command: terraform plan -out=tfplan
-      - run:
           name: Terraform Apply
           command: terraform apply -auto-approve
-          
-  hold-for-approval:
+
+  hold-for-destroy:
     docker:
       - image: hashicorp/terraform:latest
     working_directory: /terraform_project
     steps:
       - checkout
       - run:
-          name: Pause for Manual Approval
-          command: |
-            echo "Waiting for manual approval..."
-            # Your manual approval logic goes here, if any
-            # You might integrate with external systems or use CircleCI approvals
+          name: Hold for Destroy Approval
+          command: echo "Hold for manual approval for destroy..."
 
   destroy:
     docker:
@@ -37,31 +31,28 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Terraform Init for Destroy
-          command: terraform init
-      - run:
-          name: Terraform Destroy
+          name: Destroy Infrastructure
           command: terraform destroy -auto-approve
 
 workflows:
+  version: 2
   build-and-destroy:
     jobs:
       - build-and-destroy:
           filters:
             branches:
               only:
-                - main
-      - hold-for-approval:
+                - your-branch
+
+      - hold-for-destroy:
+          type: approval
           requires:
             - build-and-destroy
-          filters:
-            branches:
-              only:
-                - main
+
       - destroy:
           requires:
-            - hold-for-approval
+            - hold-for-destroy
           filters:
             branches:
               only:
-                - main
+                - your-branch
