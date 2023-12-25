@@ -29,13 +29,13 @@ jobs:
       - image: hashicorp/terraform:latest
     working_directory: /terraform_project
     steps:
-  - checkout
-  - run:
-      name: Terraform Init
-      command: terraform init
-  - run:
-      name: Terraform Destroy
-      command: terraform destroy -auto-approve
+      - checkout
+      - run:
+          name: Terraform Init
+          command: terraform init
+      - run:
+          name: Terraform Destroy
+          command: terraform destroy -auto-approve
 
 
 workflows:
