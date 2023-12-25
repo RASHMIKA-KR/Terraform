@@ -40,7 +40,7 @@ workflows:
           filters:
             branches:
               only:
-                - build-branch
+                - main
 
       - destroy:
           requires:
